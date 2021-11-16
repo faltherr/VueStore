@@ -16,12 +16,14 @@ const generateMockProducts = (number) => {
     const products = [];
     while (number >= 0) {
         products.push({
-            id: number,
             color: generateArray().map(() => faker.commerce.color()),
+            department: faker.commerce.department(),
+            id: number,
+            image: `${faker.image.sports()}?random=${getRandomInt(1, 500)}`,
             name: faker.commerce.productName(),
             price: faker.commerce.price(),
             prodDesc: faker.commerce.productDescription(),
-            image: faker.image.fashion(),
+            stock: getRandomInt(0, 10)
         })
         number--
     }
