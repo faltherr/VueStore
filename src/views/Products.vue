@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h4>Products</h4>
+    <h2>Products</h2>
     <div>
       <div class="search-container">
         <input type="text" />
         <button>Search</button>
       </div>
       <div class="department-container">
+        <h4>Departments</h4>
         <button v-for="department in departments" :key="department">{{ department }}</button>
       </div>
       <div class="product-card-container">

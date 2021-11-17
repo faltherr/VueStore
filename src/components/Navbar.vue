@@ -1,7 +1,11 @@
 <template>
   <nav>
-    <h4>VueStore</h4>
-    <h4>Cart</h4>
+    <router-link :to="{ name: 'Products'}">
+      <h4>VueStore</h4>
+    </router-link>
+    <router-link :to="{name: 'Cart'}">
+      <h4>Cart</h4>
+    </router-link>
   </nav>
 </template>
 

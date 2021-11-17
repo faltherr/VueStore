@@ -1,10 +1,12 @@
 <template>
-  <div class="product-card">
-    <img :src="product.image" alt="product image" />
-    <h4>{{ product.name }}</h4>
-    <p>Department: {{product.department}}</p>
-    <p>{{ `$${product.price}` }}</p>
-  </div>
+  <router-link :to="{name: 'Product', params: {id: product.id}}">
+    <div class="product-card">
+      <img :src="product.image" alt="product image" />
+      <h4>{{ product.name }}</h4>
+      <p>Department: {{product.department}}</p>
+      <p>{{ `$${product.price}` }}</p>
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -24,9 +26,15 @@ export default {
   margin: 15px;
   overflow: hidden;
   padding: 20px;
+  transition: 0.3s;
   width: 300px;
   height: 400px;
 }
+
+.product-card:hover {
+  box-shadow: 0 8px 16px 0 white;
+}
+
 .product-card img {
   height: 50%;
 }
