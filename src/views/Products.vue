@@ -3,15 +3,19 @@
     <h2>Products</h2>
     <div>
       <div class="search-container">
-        <input type="text" />
+        <input type="text" v-model="searchTerm" placeholder="search for product" />
         <button>Search</button>
       </div>
       <div class="department-container">
         <h4>Departments</h4>
-        <button v-for="department in departments" :key="department">{{ department }}</button>
+        <button
+          v-for="department in departments"
+          :key="department"
+          @click="toggleSelectedDepartments(department)"
+        >{{ department }}</button>
       </div>
       <div class="product-card-container">
-        <ProductCard v-for="product in products" :key="product.id" :product="product" />
+        <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product" />
       </div>
     </div>
   </div>
@@ -27,14 +31,14 @@ export default {
   data() {
     return {
       loadingProducts: false,
-      products: []
+      products: [],
+      searchTerm: ""
     };
   },
   computed: {
     departments() {
       if (this.products.length) {
         return this.products.reduce((prev, cur) => {
-          console.log(prev);
           if (!prev.some(d => d === cur.department)) {
             prev.push(cur.department);
           }
@@ -43,6 +47,11 @@ export default {
       } else {
         return [];
       }
+    },
+    filteredProducts() {
+      return this.products.filter(p =>
+        p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
     }
   },
   async created() {
@@ -55,6 +64,15 @@ export default {
       this.loadingProducts = false;
     } catch (err) {
       console.log(err);
+    }
+  },
+  methods: {
+    toggleSelectedDepartments(department) {
+      if (this.departments.includes(department)) {
+        this.departments = this.departments.filter(d => d !== department);
+      } else {
+        this.departments = this.departments.concat([department]);
+      }
     }
   }
 };
@@ -73,3 +91,5 @@ export default {
   margin-bottom: 25px;
 }
 </style>
+
+// Question: When to use a computed setter?
