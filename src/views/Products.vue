@@ -12,6 +12,7 @@
           v-for="department in departments"
           :key="department"
           @click="toggleSelectedDepartments(department)"
+          :style="selectedDepartments.includes(department) ? {backgroundColor: '#ffe535'} : null"
         >{{ department }}</button>
       </div>
       <div class="product-card-container">
@@ -32,7 +33,8 @@ export default {
     return {
       loadingProducts: false,
       products: [],
-      searchTerm: ""
+      searchTerm: "",
+      selectedDepartments: []
     };
   },
   computed: {
@@ -68,10 +70,14 @@ export default {
   },
   methods: {
     toggleSelectedDepartments(department) {
-      if (this.departments.includes(department)) {
-        this.departments = this.departments.filter(d => d !== department);
+      if (this.selectedDepartments.includes(department)) {
+        this.selectedDepartments = this.selectedDepartments.filter(
+          d => d !== department
+        );
       } else {
-        this.departments = this.departments.concat([department]);
+        this.selectedDepartments = this.selectedDepartments.concat([
+          department
+        ]);
       }
     }
   }
