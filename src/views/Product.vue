@@ -25,18 +25,19 @@
             <em>{{ stockWarning }}</em>
           </strong>
         </div>
-        <button :disabled="product.stock === 0">Add to Cart</button>
+        <button :disabled="product.stock === 0 && !selectedColor" @click="addToCart">Add to Cart</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { eventBus } from "../main";
 export default {
   name: "Product",
   props: {
     id: {
-      type: String
+      type: Number
     }
   },
   data() {
@@ -47,6 +48,7 @@ export default {
     };
   },
   computed: {
+    // The stock will change when adding an item to the cart. How best to handle that?
     stockWarning() {
       if (this.product.stock === 0) {
         return "Out of stock";
@@ -63,6 +65,14 @@ export default {
     this.selectedColor = this.product.color[0];
   },
   methods: {
+    addToCart(product) {
+      const productForCart = {
+        ...this.product,
+        selectedColor: this.selectedColor,
+        count: 1
+      };
+      eventBus.$emit("productAdded", productForCart);
+    },
     changeSelectedColor(color) {
       this.selectedColor = color;
     }

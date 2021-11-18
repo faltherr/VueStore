@@ -4,7 +4,6 @@
     <div>
       <div class="search-container">
         <input type="text" v-model="searchTerm" placeholder="search for product" />
-        <button>Search</button>
       </div>
       <div class="department-container">
         <h4>Departments</h4>

@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{name: 'Product', params: {id: product.id}}">
+  <router-link :to="{name: 'Product', params: {id: +product.id}}">
     <div class="product-card">
       <img :src="product.image" alt="product image" />
       <h4>{{ product.name }}</h4>
@@ -21,7 +21,7 @@ export default {
 
 <style scoped>
 .product-card {
-  background-color: #243b94;
+  background-color: darkblue;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 15px;
   overflow: hidden;
