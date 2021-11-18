@@ -4,13 +4,22 @@
       <h4>VueStore</h4>
     </router-link>
     <router-link :to="{name: 'Cart'}">
-      <h4>Cart</h4>
+      <div>
+        <h4>Cart</h4>
+        <h4>{{ cartCount }}</h4>
+      </div>
     </router-link>
   </nav>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    cartCount: {
+      type: Number
+    }
+  }
+};
 </script>
 
 <style  scoped>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navbar />
-    <router-view></router-view>
+    <Navbar :cartCount="cart.length" />
+    <router-view @add-to-cart="addToCart" :cart="cart"></router-view>
   </div>
 </template>
 
@@ -12,6 +12,16 @@ export default {
   name: "App",
   components: {
     Navbar
+  },
+  data() {
+    return {
+      cart: []
+    };
+  },
+  methods: {
+    addToCart(product) {
+      this.cart.push(product);
+    }
   }
 };
 </script>
