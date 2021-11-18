@@ -8,3 +8,5 @@ export default {};
 
 <style scoped>
 </style>
+
+// Question: How to capture an event on a different route that does something like add to cart
