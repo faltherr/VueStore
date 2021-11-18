@@ -25,7 +25,7 @@
             <em>{{ stockWarning }}</em>
           </strong>
         </div>
-        <button :disabled="product.stock === 0">Add to Cart</button>
+        <button :disabled="product.stock === 0" @click="addToCart">Add to Cart</button>
       </div>
     </div>
   </div>
@@ -65,6 +65,12 @@ export default {
   methods: {
     changeSelectedColor(color) {
       this.selectedColor = color;
+    },
+    addToCart() {
+      this.$emit("add-to-cart", {
+        ...this.product,
+        selectedColor: this.selectedColor
+      });
     }
   }
 };
